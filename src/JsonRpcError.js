@@ -44,7 +44,7 @@ class JsonRpcError {
 	 */
 	setCode(code) {
 		if (utls.getType(code) !== 'Integer') {
-			throw new Error('Code must be number');
+			throw new Error('(JsonRpcError) -> setCode(): Code must be number');
 		}
 		this.code = code;
 		return this;
@@ -57,7 +57,7 @@ class JsonRpcError {
 	 */
 	setMessage(message) {
 		if (utls.getType(message) !== 'String' && !message.length) {
-			throw new Error('Message must be non-zero length string');
+			throw new Error('(JsonRpcError) -> setMessage(): Message must be non-zero length string');
 		}
 		this.message = message;
 		return this;

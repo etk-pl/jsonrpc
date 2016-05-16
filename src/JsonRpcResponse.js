@@ -15,11 +15,11 @@ class JsonRpcResponse extends JsonRpc {
 	constructor(message) {
 		if (message !== undefined) {
 			if (utls.getType(message) !== 'Object') {
-				throw new Error('Message must be object type');
+				throw new Error('(JsonRpcResponse) -> constructor(): Message must be object type');
 			}
 			message.version = message.version || JsonRpc.version;
 			if (!JsonRpc.isValidResponse(message)) {
-				throw new Error('Message is not valid json rpc response');
+				throw new Error('(JsonRpcResponse) -> constructor(): Message is not valid json rpc response');
 			}
 		} else {
 			message = {};
@@ -33,7 +33,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @param version
 	 */
 	setVersion(version) {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> setVersion(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -41,7 +41,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {*}
 	 */
 	getResource() {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> getResource(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -50,7 +50,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setResource(resource) {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> setResource(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -58,7 +58,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {*}
 	 */
 	getMethod() {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> getMethod(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -67,7 +67,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setMethod(method) {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> setMethod(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -75,7 +75,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {*}
 	 */
 	getCallback() {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> getCallback(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setCallback(callback, tls) {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> setCallback(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -93,7 +93,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {*}
 	 */
 	getParams() {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> getParams(): Method not available in module "JsonRpcResponse"');
 	}
 
 	/**
@@ -102,7 +102,7 @@ class JsonRpcResponse extends JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setParams(params) {
-		throw new Error('Method not available in module "JsonRpcResponse"');
+		throw new Error('(JsonRpcResponse) -> setParams(): Method not available in module "JsonRpcResponse"');
 	}
 }
 module.exports = JsonRpcResponse;

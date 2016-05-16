@@ -62,7 +62,7 @@ class JsonRpc {
 	 */
 	static getType(message) {
 		if (!(message instanceof Object)) {
-			throw new Error('Message parameter must be object');
+			throw new Error('(JsonRpc) -> getType(): Message parameter must be object');
 		}
 		switch (true) {
 			case JsonRpc.isValidRequest(message):
@@ -88,10 +88,10 @@ class JsonRpc {
 				try {
 					message = JSONLess.parse(message);
 				} catch (e) {
-					throw new Error(JsonRpcError.E_PARSE.message, JsonRpcError.E_PARSE.code);
+					throw new Error('(JsonRpc) -> parse(): ' + JsonRpcError.E_PARSE.message, JsonRpcError.E_PARSE.code);
 				}
 			} else {
-				throw new Error('Message must be string or object type');
+				throw new Error('(JsonRpc) -> parse(): Message must be string or object type');
 			}
 		}
 		switch (JsonRpc.getType(message)) {
@@ -102,7 +102,7 @@ class JsonRpc {
 			case 'notification':
 				return new Notification(message);
 			default:
-				throw new Error('Unknown message type');
+				throw new Error('(JsonRpc) -> parse(): Unknown message type');
 		}
 	}
 
@@ -188,7 +188,7 @@ class JsonRpc {
 				JsonRpc.removeCallback(response.getId());
 			}
 		} else {
-			throw new Error('Response must be instance of JsonRpcResponse');
+			throw new Error('(JsonRpc) -> fireCallback(): Response must be instance of JsonRpcResponse');
 		}
 	}
 
@@ -261,7 +261,7 @@ class JsonRpc {
 	 */
 	setId(id) {
 		if (utls.getType(id) !== 'Integer') {
-			throw new Error('Id must be integer');
+			throw new Error('(JsonRpc) -> setId(): Id must be integer');
 		}
 		this.message.id = id;
 		return this;
@@ -282,7 +282,7 @@ class JsonRpc {
 	 */
 	setResource(resource) {
 		if (utls.getType(resource) !== 'String') {
-			throw new Error('Resource must be "String" type');
+			throw new Error('(JsonRpc) -> setResource(): Resource must be "String" type');
 		}
 		this.message.resource = resource;
 		return this;
@@ -303,7 +303,7 @@ class JsonRpc {
 	 */
 	setMethod(method) {
 		if (utls.getType(method) !== 'String') {
-			throw new Error('Method must be "String" type');
+			throw new Error('(JsonRpc) -> setMethod(): Method must be "String" type');
 		}
 		this.message.method = method;
 		return this;
@@ -326,7 +326,7 @@ class JsonRpc {
 	setCallback(callback, tls) {
 		tls = tls || __callbacksTimeout;
 		if (typeof callback !== 'function') {
-			throw new Error('Callback must be function');
+			throw new Error('(JsonRpc) -> setCallback(): Callback must be function');
 		}
 		var self = this;
 		var timeout = setTimeout(() => {
@@ -354,7 +354,7 @@ class JsonRpc {
 	 */
 	setParams(params) {
 		if (utls.getType(params) !== 'Object') {
-			throw new Error('Params must be "Object" type');
+			throw new Error('(JsonRpc) -> setParams(): Params must be "Object" type');
 		}
 		this.message.params = params;
 		return this;

@@ -15,13 +15,13 @@ class JsonRpcNotification extends JsonRpc {
 	constructor(message) {
 		if (message !== undefined) {
 			if (utls.getType(message) !== 'Object') {
-				throw new Error('Message must be object type');
+				throw new Error('(JsonRpcNotification) -> constructor(): Message must be object type');
 			}
 			message.version = message.version || JsonRpc.version;
 			message.resource = message.resource || '__global__';
 			message.params = message.params || {};
 			if (!JsonRpc.isValidNotification(message)) {
-				throw new Error('Message is not valid json rpc notification');
+				throw new Error('(JsonRpcNotification) -> constructor(): Message is not valid json rpc notification');
 			}
 		} else {
 			message = {};
@@ -37,14 +37,14 @@ class JsonRpcNotification extends JsonRpc {
 	 * @param version
 	 */
 	setVersion(version) {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> setVersion(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
 	 * @private
 	 */
 	getId() {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> getId(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
@@ -52,14 +52,14 @@ class JsonRpcNotification extends JsonRpc {
 	 * @param id
 	 */
 	setId(id) {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> setId(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
 	 * @private
 	 */
 	getError() {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> getError(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
@@ -67,14 +67,14 @@ class JsonRpcNotification extends JsonRpc {
 	 * @param error
 	 */
 	setError(error) {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> setError(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
 	 * @private
 	 */
 	getResult() {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> getResult(): Method not available in module "JsonRpcNotification"');
 	}
 
 	/**
@@ -82,7 +82,7 @@ class JsonRpcNotification extends JsonRpc {
 	 * @param result
 	 */
 	setResult(result) {
-		throw new Error('Method not available in module "JsonRpcNotification"');
+		throw new Error('(JsonRpcNotification) -> setResult(): Method not available in module "JsonRpcNotification"');
 	}
 }
 module.exports = JsonRpcNotification;
