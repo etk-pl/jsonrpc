@@ -13,6 +13,8 @@ class JsonRpcError {
 	 * @param code
 	 */
 	constructor(message, code) {
+		this.code = 0;
+		this.message = '';
 		if (utls.getType(message) === 'String') {
 			this.setMessage(message);
 		}
@@ -92,12 +94,12 @@ JsonRpcError.E_INVALID_REQUEST = {
 	message : 'Invalid Request'
 };
 /**
- * Namespace not found
+ * Resource not found
  * @type {{code: number, message: string}}
  */
-JsonRpcError.E_NAMESPACE_NOT_FOUND = {
+JsonRpcError.E_RESOURCE_NOT_FOUND = {
 	code : -3,
-	message : 'Namespace not found'
+	message : 'Resource not found'
 };
 /**
  * Method not found

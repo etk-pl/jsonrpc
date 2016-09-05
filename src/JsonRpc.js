@@ -141,7 +141,7 @@ class JsonRpc {
 		return message.version === __version && (message.result !== undefined || ((utls.getType(message.error) === 'Object' && utls.equals(Object.getOwnPropertyNames(message.error).sort(), [
 				'code',
 				'message'
-			]) && utls.getType(message.error.code) === 'Integer' && utls.getType(message.error.message) === 'String' && !!message.error.message) || (utls.getType(message.error) === 'JsonRpcError' && JsonRpcError.isValid(message.error))));
+			]) && utls.getType(message.error.code) === 'Integer' && utls.getType(message.error.message) === 'String') || (utls.getType(message.error) === 'JsonRpcError' && JsonRpcError.isValid(message.error))));
 	}
 
 	/**
