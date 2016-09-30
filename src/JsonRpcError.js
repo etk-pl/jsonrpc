@@ -15,6 +15,10 @@ class JsonRpcError {
 	constructor(message, code) {
 		this.code = 0;
 		this.message = '';
+		if (typeof  message == 'object') {
+			code = message.code;
+			message = message.message;
+		}
 		if (utls.getType(message) === 'String') {
 			this.setMessage(message);
 		}
