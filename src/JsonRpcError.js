@@ -2,7 +2,7 @@
  * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
  */
 "use strict";
-var utls = require('utls');
+const utls = require('utls');
 /**
  * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
  */
@@ -15,14 +15,14 @@ class JsonRpcError {
 	constructor(message, code) {
 		this.code = 0;
 		this.message = '';
-		if (typeof  message == 'object') {
+		if (typeof  message === 'object') {
 			code = message.code;
 			message = message.message;
 		}
-		if (utls.getType(message) === 'String') {
+		if (typeof message === 'string') {
 			this.setMessage(message);
 		}
-		if (utls.getType(code) === 'Integer') {
+		if (typeof code === 'number') {
 			this.setCode(code);
 		}
 	}
@@ -62,7 +62,7 @@ class JsonRpcError {
 	 * @returns {JsonRpcError}
 	 */
 	setMessage(message) {
-		if (utls.getType(message) !== 'String' && !message.length) {
+		if (typeof message !== 'string' && !message.length) {
 			throw new Error('(JsonRpcError) -> setMessage(): Message must be non-zero length string');
 		}
 		this.message = message;
@@ -75,7 +75,7 @@ class JsonRpcError {
 	 * @returns {Boolean}
 	 */
 	static isValid(error) {
-		return error instanceof JsonRpcError || (utls.getType(error) === 'Object' && utls.equals(Object.getOwnPropertyNames(error).sort(), [
+		return error instanceof JsonRpcError || (typeof error === 'object' && error !== null && utls.equals(Object.getOwnPropertyNames(error).sort(), [
 				'code',
 				'message'
 			]) && utls.getType(error.code) === 'Integer' && utls.getType(error.message) === 'String' && !!error.message.length);

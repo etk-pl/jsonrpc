@@ -2,13 +2,13 @@
  * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
  */
 "use strict";
-var utls = require('utls');
-var JSONLess = require('json-less');
-var __version = '1.1.0';
-var __id = 0;
-var __callbacks = {};
-var __callbacksTimeout = 60000;
-var __options = {autoFireCallbacks : true};
+const utls = require('utls');
+const JSONLess = require('json-less');
+const __version = '1.1.0';
+let __id = 0;
+const __callbacks = {};
+const __callbacksTimeout = 60000;
+const __options = {autoFireCallbacks : true};
 /**
  * @abstract
  * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
@@ -18,11 +18,14 @@ class JsonRpc {
 	 * @param {Object} message
 	 */
 	constructor(message) {
+		if (typeof message !== 'object' || message === null) {
+			throw new TypeError('message must be object');
+		}
+		const callback = message.callback;
 		if (this.constructor === JsonRpc) {
 			throw new TypeError('Abstract class "JsonRpc" cannot be instantiated directly.');
 		}
 		if (message.callback !== undefined) {
-			var callback = message.callback;
 			delete message.callback;
 		}
 		this.message = message;
@@ -61,7 +64,7 @@ class JsonRpc {
 	 * @throws {Error}
 	 */
 	static getType(message) {
-		if (!(message instanceof Object)) {
+		if (typeof message !== 'object' || message === null) {
 			throw new Error('(JsonRpc) -> getType(): Message parameter must be object');
 		}
 		switch (true) {
@@ -83,8 +86,8 @@ class JsonRpc {
 	 * @throws {Error}
 	 */
 	static parse(message) {
-		if (utls.getType(message) !== 'Object') {
-			if (utls.getType(message) === 'String') {
+		if (typeof message !== 'object') {
+			if (typeof message === 'string') {
 				try {
 					message = JSONLess.parse(message);
 				} catch (e) {
@@ -112,13 +115,13 @@ class JsonRpc {
 	 * @returns {Boolean}
 	 */
 	static isValidRequest(message) {
-		if (utls.getType(message) !== 'Object') {
+		if (typeof message !== 'object' || message === null) {
 			return false;
 		}
 		if (message.error !== undefined || message.result !== undefined) {
 			return false;
 		}
-		return message.version === __version && utls.getType(message.id) === 'Integer' && message.id > 0 && utls.getType(message.resource) === 'String' && !!message.resource.length && utls.getType(message.method) === 'String' && !!message.method.length && utls.getType(message.params) === 'Object';
+		return message.version === __version && utls.getType(message.id) === 'Integer' && message.id > 0 && typeof message.resource === 'string' && !!message.resource.length && typeof message.method === 'string' && !!message.method.length && typeof message.params === 'object' && message.params !== null;
 	}
 
 	/**
@@ -127,7 +130,7 @@ class JsonRpc {
 	 * @returns {Boolean}
 	 */
 	static isValidResponse(message) {
-		if (utls.getType(message) !== 'Object') {
+		if (typeof message !== 'object' || message === null) {
 			return false;
 		}
 		if (message.method !== undefined || message.resource !== undefined || message.params !== undefined) {
@@ -138,10 +141,10 @@ class JsonRpc {
 				return false;
 			}
 		}
-		return message.version === __version && (message.result !== undefined || ((utls.getType(message.error) === 'Object' && utls.equals(Object.getOwnPropertyNames(message.error).sort(), [
+		return message.version === __version && (message.result !== undefined || ((typeof message.error === 'object' && message.error !== null && utls.equals(Object.getOwnPropertyNames(message.error).sort(), [
 				'code',
 				'message'
-			]) && utls.getType(message.error.code) === 'Integer' && utls.getType(message.error.message) === 'String') || (utls.getType(message.error) === 'JsonRpcError' && JsonRpcError.isValid(message.error))));
+			]) && utls.getType(message.error.code) === 'Integer' && typeof message.error.message === 'string') || (utls.getType(message.error) === 'JsonRpcError' && JsonRpcError.isValid(message.error))));
 	}
 
 	/**
@@ -150,13 +153,13 @@ class JsonRpc {
 	 * @returns {Boolean}
 	 */
 	static isValidNotification(message) {
-		if (utls.getType(message) !== 'Object') {
+		if (typeof message !== 'object' || message === null) {
 			return false;
 		}
 		if (message.error !== undefined || message.result !== undefined || message.id !== undefined) {
 			return false;
 		}
-		return message.version === __version && utls.getType(message.resource) === 'String' && message.resource.length && utls.getType(message.method) === 'String' && message.method.length && utls.getType(message.params) === 'Object';
+		return message.version === __version && typeof message.resource === 'string' && message.resource.length && typeof message.method === 'string' && message.method.length && (typeof message.params === 'object' && message.params !== null);
 	}
 
 	/**
@@ -182,7 +185,7 @@ class JsonRpc {
 	 */
 	static fireCallback(response) {
 		if (response instanceof Response) {
-			var callback = __callbacks[response.getId()];
+			const callback = __callbacks[response.getId()];
 			if (callback instanceof Object && callback.cb instanceof Function) {
 				callback.cb(response);
 				JsonRpc.removeCallback(response.getId());
@@ -197,8 +200,8 @@ class JsonRpc {
 	 * @param {Number} id
 	 */
 	static removeCallback(id) {
-		var callback = __callbacks[id];
-		if (callback instanceof Object) {
+		const callback = __callbacks[id];
+		if (typeof callback === 'object' && callback !== null) {
 			clearTimeout(callback.timeout);
 			delete __callbacks[id];
 		}
@@ -281,7 +284,7 @@ class JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setResource(resource) {
-		if (utls.getType(resource) !== 'String') {
+		if (typeof resource !== 'string') {
 			throw new Error('(JsonRpc) -> setResource(): Resource must be "String" type');
 		}
 		this.message.resource = resource;
@@ -302,7 +305,7 @@ class JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setMethod(method) {
-		if (utls.getType(method) !== 'String') {
+		if (typeof method !== 'string') {
 			throw new Error('(JsonRpc) -> setMethod(): Method must be "String" type');
 		}
 		this.message.method = method;
@@ -328,8 +331,8 @@ class JsonRpc {
 		if (typeof callback !== 'function') {
 			throw new Error('(JsonRpc) -> setCallback(): Callback must be function');
 		}
-		var self = this;
-		var timeout = setTimeout(() => {
+		const self = this;
+		const timeout = setTimeout(() => {
 			JsonRpc.removeCallback(self.message.id);
 		}, tls);
 		__callbacks[this.message.id] = {
@@ -353,7 +356,7 @@ class JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setParams(params) {
-		if (utls.getType(params) !== 'Object') {
+		if (typeof params !== 'object' || params === null) {
 			throw new Error('(JsonRpc) -> setParams(): Params must be "Object" type');
 		}
 		this.message.params = params;

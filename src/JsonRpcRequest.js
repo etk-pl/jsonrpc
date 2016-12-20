@@ -7,8 +7,8 @@
  * @type {number}
  * @private
  */
-var utls = require('utls');
-var JsonRpc = require('./JsonRpc.js')
+const utls = require('utls');
+const JsonRpc = require('./JsonRpc.js');
 /**
  * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
  * @extends JsonRpc
@@ -19,7 +19,7 @@ class JsonRpcRequest extends JsonRpc {
 	 */
 	constructor(message) {
 		if (message !== undefined) {
-			if (utls.getType(message) !== 'Object') {
+			if (typeof message !== 'object' || message === null) {
 				throw new Error('(JsonRpcRequest) -> constructor(): Message must be object type');
 			}
 			message.version = message.version || JsonRpc.version;
