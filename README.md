@@ -1,6 +1,7 @@
 # JsonRpc
 [![Build Status](https://travis-ci.org/etk-pl/jsonrpc.svg?branch=master)](https://travis-ci.org/etk-pl/jsonrpc)
 [![npm version](https://badge.fury.io/js/%40etk%2Fjsonrpc.svg)](https://badge.fury.io/js/%40etk%2Fjsonrpc)
+[![Code Climate](https://codeclimate.com/github/etk-pl/jsonrpc/badges/gpa.svg)](https://codeclimate.com/github/etk-pl/jsonrpc)
 ## Schema
 ```javascript
 {
