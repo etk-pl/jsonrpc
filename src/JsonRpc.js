@@ -187,6 +187,7 @@ class JsonRpc {
 		if (response instanceof Response) {
 			const callback = __callbacks[response.getId()];
 			if (callback instanceof Object && callback.cb instanceof Function) {
+				clearTimeout(callback.timeout);
 				callback.cb(response);
 				JsonRpc.removeCallback(response.getId());
 			}
@@ -202,7 +203,6 @@ class JsonRpc {
 	static removeCallback(id) {
 		const callback = __callbacks[id];
 		if (typeof callback === 'object' && callback !== null) {
-			clearTimeout(callback.timeout);
 			delete __callbacks[id];
 		}
 	}

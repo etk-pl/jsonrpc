@@ -25,7 +25,7 @@
   "homepage": "https://github.com/etk-pl/jsonrpc#readme",
   "dependencies": {
     "json-less": "^0.2.7",
-    "utls": "^0.2.19"
+    "utls": "^0.2.22"
   },
   "devDependencies": {
     "coveralls": "^2.11.15",
