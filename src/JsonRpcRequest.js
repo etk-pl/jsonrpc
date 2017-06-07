@@ -1,5 +1,5 @@
 /**
- * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
+ * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 "use strict";
 /**
@@ -10,7 +10,7 @@
 const utls = require('utls');
 const JsonRpc = require('./JsonRpc.js');
 /**
- * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
+ * @author Michał Żaloudik <ponury.kostek@gmail.com>
  * @extends JsonRpc
  */
 class JsonRpcRequest extends JsonRpc {

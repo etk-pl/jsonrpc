@@ -1,5 +1,5 @@
 /**
- * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
+ * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 "use strict";
 const utls = require('utls');
@@ -11,7 +11,7 @@ const __callbacksTimeout = 60000;
 const __options = {autoFireCallbacks : true};
 /**
  * @abstract
- * @author Michał Żaloudik <michal.zaloudik@redcart.pl>
+ * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 class JsonRpc {
 	/**
@@ -34,9 +34,7 @@ class JsonRpc {
 		}
 		if (this.constructor === Response) {
 			if (__options.autoFireCallbacks) {
-				if (__callbacks[this.getId()] !== undefined) {
-					JsonRpc.fireCallback(this);
-				}
+				JsonRpc.fireCallback(this);
 			}
 		}
 	}
@@ -83,7 +81,7 @@ class JsonRpc {
 	 * Parse message
 	 * @param {Object|String} message
 	 * @returns {JsonRpcRequest|JsonRpcResponse|JsonRpcNotification}
-	 * @throws {Error}
+	 * @throws {Error|TypeError}
 	 */
 	static parse(message) {
 		if (typeof message !== 'object') {
@@ -94,7 +92,7 @@ class JsonRpc {
 					throw new Error('(JsonRpc) -> parse(): ' + JsonRpcError.E_PARSE.message, JsonRpcError.E_PARSE.code);
 				}
 			} else {
-				throw new Error('(JsonRpc) -> parse(): Message must be string or object type');
+				throw new TypeError('(JsonRpc) -> parse(): Message must be string or object type');
 			}
 		}
 		switch (JsonRpc.getType(message)) {
@@ -105,7 +103,7 @@ class JsonRpc {
 			case 'notification':
 				return new Notification(message);
 			default:
-				throw new Error('(JsonRpc) -> parse(): Unknown message type');
+				throw new TypeError('(JsonRpc) -> parse(): Unknown message type');
 		}
 	}
 

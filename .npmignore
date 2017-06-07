@@ -1,7 +1,14 @@
 .idea/
+bench/
 coverage/
 doc/
 node_modules/
 test/
+.codeclimate.yml
+.eslintrc
+.eslintignore
 .gitignore
 .gitattributes
+.jsdocrc
+.travis.yml
+codeclimate.html
