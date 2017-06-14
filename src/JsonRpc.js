@@ -119,7 +119,7 @@ class JsonRpc {
 		if (message.error !== undefined || message.result !== undefined) {
 			return false;
 		}
-		return message.version === __version && utls.getType(message.id) === 'Integer' && message.id > 0 && typeof message.resource === 'string' && !!message.resource.length && typeof message.method === 'string' && !!message.method.length && typeof message.params === 'object' && message.params !== null;
+		return message.version === __version && typeof message.id === 'number' && message.id > 0 && typeof message.resource === 'string' && !!message.resource.length && typeof message.method === 'string' && !!message.method.length && typeof message.params === 'object' && message.params !== null;
 	}
 
 	/**
@@ -135,14 +135,14 @@ class JsonRpc {
 			return false;
 		}
 		if (message.id !== undefined) {
-			if (utls.getType(message.id) !== 'Integer' || message.id <= 0) {
+			if (typeof message.id !== 'number' || message.id <= 0) {
 				return false;
 			}
 		}
 		return message.version === __version && (message.result !== undefined || ((typeof message.error === 'object' && message.error !== null && utls.equals(Object.getOwnPropertyNames(message.error).sort(), [
 				'code',
 				'message'
-			]) && utls.getType(message.error.code) === 'Integer' && typeof message.error.message === 'string') || (utls.getType(message.error) === 'JsonRpcError' && JsonRpcError.isValid(message.error))));
+			]) && typeof message.error.code === 'number' && typeof message.error.message === 'string') || (message.error instanceof JsonRpcError && JsonRpcError.isValid(message.error))));
 	}
 
 	/**
@@ -261,7 +261,7 @@ class JsonRpc {
 	 * @returns {JsonRpc}
 	 */
 	setId(id) {
-		if (utls.getType(id) !== 'Integer') {
+		if (typeof id !== 'number') {
 			throw new Error('(JsonRpc) -> setId(): Id must be integer');
 		}
 		this.message.id = id;
@@ -417,10 +417,10 @@ class JsonRpc {
 	}
 }
 module.exports = JsonRpc;
-var Request = require('./JsonRpcRequest.js');
-var Response = require('./JsonRpcResponse.js');
-var Notification = require('./JsonRpcNotification.js');
-var JsonRpcError = require('./JsonRpcError.js');
+const Request = require('./JsonRpcRequest.js');
+const Response = require('./JsonRpcResponse.js');
+const Notification = require('./JsonRpcNotification.js');
+const JsonRpcError = require('./JsonRpcError.js');
 module.exports.Request = Request;
 module.exports.Response = Response;
 module.exports.Notification = Notification;

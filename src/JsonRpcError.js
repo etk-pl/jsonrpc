@@ -49,7 +49,7 @@ class JsonRpcError {
 	 * @returns {JsonRpcError}
 	 */
 	setCode(code) {
-		if (utls.getType(code) !== 'Integer') {
+		if (typeof code !== 'number') {
 			throw new Error('(JsonRpcError) -> setCode(): Code must be number');
 		}
 		this.code = code;
@@ -78,7 +78,7 @@ class JsonRpcError {
 		return error instanceof JsonRpcError || (typeof error === 'object' && error !== null && utls.equals(Object.getOwnPropertyNames(error).sort(), [
 				'code',
 				'message'
-			]) && utls.getType(error.code) === 'Integer' && utls.getType(error.message) === 'String' && !!error.message.length);
+			]) && typeof error.code === 'number' && typeof error.message === 'string' && !!error.message.length);
 	}
 }
 /**

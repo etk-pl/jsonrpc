@@ -26,7 +26,7 @@ describe('JsonRpcRequest', () => {
 		assert.equal(req.getVersion(), jsonrpc.version);
 		assert.equal(req.getResource(), '__global__');
 		assert.deepStrictEqual(req.getParams(), {});
-		assert.equal(utls.getType(req.getId()), 'Integer');
+		assert.equal(utls.getType(req.getId()), 'Number');
 	});
 	describe('restricted methods', () => {
 		var obj = new jsonrpc.Request();
