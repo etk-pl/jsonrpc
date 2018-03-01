@@ -3,9 +3,6 @@
  */
 "use strict";
 const utls = require('utls');
-/**
- * @author Michał Żaloudik <ponury.kostek@gmail.com>
- */
 class JsonRpcError {
 	/**
 	 *

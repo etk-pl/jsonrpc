@@ -417,10 +417,10 @@ class JsonRpc {
 	}
 }
 module.exports = JsonRpc;
-const Request = require('./JsonRpcRequest.js');
-const Response = require('./JsonRpcResponse.js');
-const Notification = require('./JsonRpcNotification.js');
-const JsonRpcError = require('./JsonRpcError.js');
+const Request = require('./request.js');
+const Response = require('./response.js');
+const Notification = require('./notification.js');
+const JsonRpcError = require('./error.js');
 module.exports.Request = Request;
 module.exports.Response = Response;
 module.exports.Notification = Notification;

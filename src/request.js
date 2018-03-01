@@ -8,7 +8,7 @@
  * @private
  */
 const utls = require('utls');
-const JsonRpc = require('./JsonRpc.js');
+const JsonRpc = require('./jsonrpc.js');
 /**
  * @author Michał Żaloudik <ponury.kostek@gmail.com>
  * @extends JsonRpc
