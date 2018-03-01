@@ -71,21 +71,21 @@ describe('JsonRpcResponse', () => {
 				id : 1,
 				error : new jsonrpc.JsonRpcError({
 					message : "some error",
-					code : 0
+					code : "0"
 				})
 			})).toJSON(), {
 				id : 1,
 				version : jsonrpc.version,
 				error : new jsonrpc.JsonRpcError({
 					message : "some error",
-					code : 0
+					code : "0"
 				})
 			});
 		});
 		it('methods with error', () => {
 			var not = new jsonrpc.Response();
 			var error = new jsonrpc.JsonRpcError();
-			error.setMessage("some message").setCode(0);
+			error.setMessage("some message").setCode("0");
 			not.setId(1);
 			not.setError(error);
 			assert.deepEqual(not.toJSON(), {

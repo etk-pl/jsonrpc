@@ -26,7 +26,6 @@ describe('JsonRpc', () => {
 			'{"version" : "' + jsonrpc.version + '", "resource" : 1, "method": "ping", "params" : {}}',
 			'{"version" : "' + jsonrpc.version + '", "resource" : "__global__", "method": 1, "params" : {}}',
 			'{"version" : "' + jsonrpc.version + '", "resource" : "__global__", "method": "ping", "params" : 1}',
-			'{"version" : "' + jsonrpc.version + '", "id" : 1, "error" : {"code":"1", "message":"msg"}}',
 			'{"version" : "' + jsonrpc.version + '", "id" : 1, "error" : {"code":1, "message":1}}',
 			'{"version" : "' + jsonrpc.version + '", "id" : "1", "result" : null, "error" : {"code":1, "message":"msg"}}'
 		];
@@ -55,7 +54,7 @@ describe('JsonRpc', () => {
 				}
 			}),
 			'{"version":"' + jsonrpc.version + '","id":1,"result":null}',
-			'{"version":"' + jsonrpc.version + '","id":1,"error":{"code":1,"message":"msg"}}',
+			'{"version":"' + jsonrpc.version + '","id":1,"error":{"code":"1","message":"msg"}}',
 			'{"version":"' + jsonrpc.version + '","id":1,"resource":"__global__","method":"ping","params":{}}',
 			'{"version":"' + jsonrpc.version + '","resource":"__global__","method":"ping","params":{}}'
 		];
