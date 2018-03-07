@@ -19,7 +19,7 @@ class JsonRpcError {
 		if (typeof message === 'string') {
 			this.setMessage(message);
 		}
-		if (typeof code === 'number') {
+		if (typeof code === 'string') {
 			this.setCode(code);
 		}
 	}
@@ -46,7 +46,7 @@ class JsonRpcError {
 	 * @returns {JsonRpcError}
 	 */
 	setCode(code) {
-		if (typeof code !== 'number') {
+		if (typeof code !== 'string') {
 			throw new Error('(JsonRpcError) -> setCode(): Code must be number');
 		}
 		this.code = code;
@@ -75,7 +75,7 @@ class JsonRpcError {
 		return error instanceof JsonRpcError || (typeof error === 'object' && error !== null && utls.equals(Object.getOwnPropertyNames(error).sort(), [
 				'code',
 				'message'
-			]) && typeof error.code === 'number' && typeof error.message === 'string' && !!error.message.length);
+			]) && typeof error.code === 'string' && typeof error.message === 'string' && !!error.message.length);
 	}
 }
 /**
@@ -83,7 +83,7 @@ class JsonRpcError {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_PARSE = {
-	code : -1,
+	code : 'E_PARSE',
 	message : 'Parse error'
 };
 /**
@@ -91,7 +91,7 @@ JsonRpcError.E_PARSE = {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_INVALID_REQUEST = {
-	code : -2,
+	code : 'E_INVALID_REQUEST',
 	message : 'Invalid Request'
 };
 /**
@@ -99,7 +99,7 @@ JsonRpcError.E_INVALID_REQUEST = {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_RESOURCE_NOT_FOUND = {
-	code : -3,
+	code : 'E_RESOURCE_NOT_FOUND',
 	message : 'Resource not found'
 };
 /**
@@ -107,7 +107,7 @@ JsonRpcError.E_RESOURCE_NOT_FOUND = {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_METHOD_NOT_FOUND = {
-	code : -4,
+	code : 'E_METHOD_NOT_FOUND',
 	message : 'Method not found'
 };
 /**
@@ -115,7 +115,7 @@ JsonRpcError.E_METHOD_NOT_FOUND = {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_INVALID_PARAMS = {
-	code : -5,
+	code : 'E_INVALID_PARAMS',
 	message : 'Invalid params'
 };
 /**
@@ -123,7 +123,7 @@ JsonRpcError.E_INVALID_PARAMS = {
  * @type {{code: number, message: string}}
  */
 JsonRpcError.E_INTERNAL = {
-	code : -6,
+	code : 'E_INTERNAL',
 	message : 'Internal error'
 };
 module.exports = JsonRpcError;

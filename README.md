@@ -7,15 +7,15 @@
 ## Schema
 ```javascript
 {
-	"version" : String,
-	"id" : Integer,
-	"resource" : String,
-	"method" : String,
+	"version" : string,
+	"id" : number,
+	"resource" : string,
+	"method" : string,
 	"params" : Object,
 	"result" : *,
 	"error" : {
-		"code" : Integer,
-		"message" : String
+		"code" : string,
+		"message" : string
 	}
 }
 ```
@@ -71,12 +71,12 @@ var jsonrpc = require('@etk/jsonrpc');
 var response = new jsonrpc.Response({
 	id : 1,
 	error : {
-		code : 1,
+		code : "ERR_CODE",
 		message : 'Error message'
 	}
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":1,"message":"Error message"}}
+// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
@@ -84,12 +84,12 @@ var jsonrpc = require('@etk/jsonrpc');
 var response = new jsonrpc.Response({
 	id : 1,
 	error : {
-		code : 1,
+		code : "ERR_CODE",
 		message : 'Error message'
 	}
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":1,"message":"Error message"}}
+// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
@@ -97,12 +97,12 @@ var jsonrpc = require('@etk/jsonrpc');
 var response = new jsonrpc.Response({
 	id : 1,
 	error : {
-		code : 1,
+		code : "ERR_CODE",
 		message : 'Error message'
 	}
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":1,"message":"Error message"}}
+// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 
 ### New notification

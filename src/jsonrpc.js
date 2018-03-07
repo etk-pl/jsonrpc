@@ -4,7 +4,7 @@
 "use strict";
 const utls = require('utls');
 const JSONLess = require('json-less');
-const __version = '1.1.0';
+const __version = '1.2.0';
 let __id = 0;
 const __callbacks = {};
 const __callbacksTimeout = 60000;
@@ -142,7 +142,7 @@ class JsonRpc {
 		return message.version === __version && (message.result !== undefined || ((typeof message.error === 'object' && message.error !== null && utls.equals(Object.getOwnPropertyNames(message.error).sort(), [
 				'code',
 				'message'
-			]) && typeof message.error.code === 'number' && typeof message.error.message === 'string') || (message.error instanceof JsonRpcError && JsonRpcError.isValid(message.error))));
+			]) && typeof message.error.code === 'string' && typeof message.error.message === 'string') || (message.error instanceof JsonRpcError && JsonRpcError.isValid(message.error))));
 	}
 
 	/**

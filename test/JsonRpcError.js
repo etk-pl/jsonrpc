@@ -12,13 +12,13 @@ describe('JsonRpcError', () => {
 		});
 		it('setters & getters & isValid', () => {
 			var err = new jsonrpc.JsonRpcError();
-			err.setMessage('some message').setCode(1);
+			err.setMessage('some message').setCode("code");
 			assert.equal(err.getMessage(), 'some message');
-			assert.equal(err.getCode(), 1);
+			assert.equal(err.getCode(), "code");
 			assert.equal(jsonrpc.JsonRpcError.isValid(err), true);
 			assert.equal(jsonrpc.JsonRpcError.isValid({
 				message : "some message",
-				code : 1
+				code : "code"
 			}), true);
 		});
 	});
