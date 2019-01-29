@@ -7,74 +7,66 @@
  * @type {number}
  * @private
  */
-const utls = require('utls');
-const JsonRpc = require('./jsonrpc.js');
+const {getVersion, getId, getResource, getMethod, getParams, getCallback, setVersion, setId, setResource, setMethod, setParams, setCallback, toJSON, toString} = require("./traits");
+const {uc_first} = require("./common");
+const JsonRpc = require("./jsonrpc.js");
+const ExtError = require("exterror");
+
 /**
- * @author Michał Żaloudik <ponury.kostek@gmail.com>
- * @extends JsonRpc
+ * @param {JsonRpc} jr
+ * @param {Object} message
  */
-class JsonRpcRequest extends JsonRpc {
-	/**
-	 * @param {Object} message
-	 */
-	constructor(message) {
-		if (message !== undefined) {
-			if (typeof message !== 'object' || message === null) {
-				throw new Error('(JsonRpcRequest) -> constructor(): Message must be object type');
-			}
-			message.version = message.version || JsonRpc.version;
-			message.id = message.id || JsonRpc.getNextId();
-			message.resource = message.resource || '__global__';
-			message.params = message.params || {};
-			if (!JsonRpc.isValidRequest(message)) {
-				throw new Error('(JsonRpcRequest) -> constructor(): Message is not valid json rpc request');
-			}
-		} else {
-			message = {};
-			message.version = JsonRpc.version;
-			message.id = JsonRpc.getNextId();
-			message.resource = '__global__';
-			message.params = message.params || {};
+function Request(jr, message) {
+	this.jr = jr;
+	this.message = {
+		version: JsonRpc.version,
+		id: jr.getNextId(),
+		resource: "__global__",
+		method: "",
+		params: {}
+	};
+	if (message !== undefined) {
+		if (typeof message !== "object" || message === null) {
+			throw new ExtError("ERR_REQUEST_MESSAGE_INCORRECT_TYPE", "Message must be object type");
 		}
-		super(message);
-	}
-
-	/**
-	 * @private
-	 * @param version
-	 */
-	setVersion(version) {
-		throw new Error('(JsonRpcRequest) -> setVersion(): Method not available in module "JsonRpcRequest"');
-	}
-
-	/**
-	 * @private
-	 */
-	getError() {
-		throw new Error('(JsonRpcRequest) -> getError(): Method not available in module "JsonRpcRequest"');
-	}
-
-	/**
-	 * @private
-	 * @param error
-	 */
-	setError(error) {
-		throw new Error('(JsonRpcRequest) -> setError(): Method not available in module "JsonRpcRequest"');
-	}
-
-	/**
-	 * @private
-	 */
-	getResult() {
-		throw new Error('(JsonRpcRequest) -> getResult(): Method not available in module "JsonRpcRequest"');
-	}
-
-	/**
-	 * @private
-	 * @param result
-	 */
-	setResult(result) {
-		throw new Error('(JsonRpcRequest) -> setResult(): Method not available in module "JsonRpcRequest"');
+		Object.entries(message).forEach(([key, value]) => {
+			this["set" + uc_first(key)](value);
+		});
 	}
 }
-module.exports = JsonRpcRequest;
+
+/**
+ * @param {Number} [ttl]
+ * @returns {Promise<any>}
+ */
+Request.prototype.promise = function (ttl) {
+	return new Promise((resolve, reject) => {
+		this.setCallback((response) => {
+			const error = response.getError();
+			if (error) {
+				return reject(error);
+			}
+			resolve(response.getResult());
+		}, ttl);
+	});
+};
+/**
+ * Use traits
+ */
+Object.assign(Request.prototype, {
+	getVersion,
+	getId,
+	getResource,
+	getMethod,
+	getParams,
+	getCallback,
+	setVersion,
+	setId,
+	setResource,
+	setMethod,
+	setParams,
+	setCallback,
+	toJSON,
+	toString
+});
+module.exports = Request;

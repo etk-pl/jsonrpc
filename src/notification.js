@@ -2,87 +2,46 @@
  * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 "use strict";
-const utls = require('utls');
-const JsonRpc = require('./jsonrpc.js');
+const {getVersion, getResource, getMethod, getParams, setVersion, setResource, setMethod, setParams, toJSON, toString} = require("./traits");
+const {uc_first} = require("./common");
+const JsonRpc = require("./jsonrpc.js");
+const ExtError = require("exterror");
+
 /**
- * @author Michał Żaloudik <ponury.kostek@gmail.com>
- * @extends JsonRpc
+ * @param {JsonRpc} jr
+ * @param {Object} message
  */
-class JsonRpcNotification extends JsonRpc {
-	/**
-	 * @param {Object} message
-	 */
-	constructor(message) {
-		if (message !== undefined) {
-			if (typeof message !== 'object' || message === null) {
-				throw new Error('(JsonRpcNotification) -> constructor(): Message must be object type');
-			}
-			message.version = message.version || JsonRpc.version;
-			message.resource = message.resource || '__global__';
-			message.params = message.params || {};
-			if (!JsonRpc.isValidNotification(message)) {
-				throw new Error('(JsonRpcNotification) -> constructor(): Message is not valid json rpc notification');
-			}
-		} else {
-			message = {};
-			message.version = JsonRpc.version;
-			message.resource = '__global__';
-			message.params = message.params || {};
+function Notification(jr, message) {
+	this.jr = jr;
+	this.message = {
+		version: JsonRpc.version,
+		resource: "__global__",
+		method: "",
+		params: {}
+	};
+	if (message !== undefined) {
+		if (typeof message !== "object" || message === null) {
+			throw new ExtError("", "(JsonRpcNotification) -> constructor(): Message must be object type");
 		}
-		super(message);
-	}
-
-	/**
-	 * @private
-	 * @param version
-	 */
-	setVersion(version) {
-		throw new Error('(JsonRpcNotification) -> setVersion(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 */
-	getId() {
-		throw new Error('(JsonRpcNotification) -> getId(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 * @param id
-	 */
-	setId(id) {
-		throw new Error('(JsonRpcNotification) -> setId(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 */
-	getError() {
-		throw new Error('(JsonRpcNotification) -> getError(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 * @param error
-	 */
-	setError(error) {
-		throw new Error('(JsonRpcNotification) -> setError(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 */
-	getResult() {
-		throw new Error('(JsonRpcNotification) -> getResult(): Method not available in module "JsonRpcNotification"');
-	}
-
-	/**
-	 * @private
-	 * @param result
-	 */
-	setResult(result) {
-		throw new Error('(JsonRpcNotification) -> setResult(): Method not available in module "JsonRpcNotification"');
+		Object.entries(message).forEach(([key, value]) => {
+			this["set" + uc_first(key)](value);
+		});
 	}
 }
-module.exports = JsonRpcNotification;
+
+/**
+ * Use traits
+ */
+Object.assign(Notification.prototype, {
+	getVersion,
+	getResource,
+	getMethod,
+	getParams,
+	setVersion,
+	setResource,
+	setMethod,
+	setParams,
+	toJSON,
+	toString
+});
+module.exports = Notification;
