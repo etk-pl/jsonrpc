@@ -14,12 +14,6 @@ describe("JsonRpcResponse", () => {
 			jr.Response("");
 		});
 	});
-	//MARK
-	it.skip("not valid syntax", () => {
-		assert.throws(() => {
-			jr.Response({});
-		});
-	});
 	it("defaults", () => {
 		const res = jr.Response();
 		assert.strictEqual(res.getVersion(), JR.version);

@@ -179,11 +179,8 @@ module.exports.Notification = Notification;
 module.exports.version = __version;
 module.exports.addHandler = JSONLess.addHandler;
 JSONLess.addHandler(ExtError, (cls, value) => {
-	const val = value.toJSON();
-	console.log("ExtError val", val);
-	return val;
+	return value.toJSON();
 }, (cls, value) => {
-	console.log("ExtError value", value);
 	return new ExtError(value.code, value.message);
 });
 /**

@@ -66,14 +66,12 @@ describe("JsonRpc", () => {
 		});
 		messages.forEach((message, key) => {
 			it("hasValidSyntax (#" + key + ")", () => {
-				console.log("hasValidSyntax (#" + key + ")", key, message);
 				message = jr.options.encoder.parse(message);
 				assert.strictEqual(JR.hasValidSyntax(message), true);
 			});
 		});
 		messages.forEach((message, key) => {
 			it("parse stringify (#" + key + ")", () => {
-				console.log("jr.parse(message)", jr.parse(message));
 				assert.strictEqual(jr.parse(message).toString(), message);
 			});
 		});

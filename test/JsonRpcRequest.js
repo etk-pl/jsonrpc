@@ -13,12 +13,6 @@ describe("JsonRpcRequest", () => {
 			jr.Request("");
 		});
 	});
-	//MARK
-	it.skip("not valid syntax", () => {
-		assert.throws(() => {
-			jr.Request({});
-		});
-	});
 	it("defaults", () => {
 		const req = jr.Request();
 		assert.strictEqual(req.getVersion(), JR.version);

@@ -13,12 +13,6 @@ describe("JsonRpcNotification", () => {
 			jr.Notification("");
 		});
 	});
-	//MARK realy?
-	it.skip("not valid syntax", () => {
-		assert.throws(() => {
-			jr.Notification({});
-		});
-	});
 	it("defaults", () => {
 		const not = jr.Notification();
 		assert.strictEqual(not.getVersion(), JR.version);
