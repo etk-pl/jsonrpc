@@ -81,7 +81,7 @@ describe("JsonRpc", () => {
 			new jr();
 		});
 	});
-	it.skip("set/getOptions", () => {
+	it("set/getOptions", () => {
 		const o = jr.getOptions(), no = {autoFireCallbacks: true};
 		jr.setOptions(no);
 		assert.deepStrictEqual(jr.getOptions(), no);

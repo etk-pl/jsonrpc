@@ -28,6 +28,20 @@ function JsonRpc(options) {
 }
 
 /**
+ *
+ * @returns {{autoFireCallbacks: boolean, encoder, callbacksTimeout: number}}
+ */
+JsonRpc.prototype.getOptions = function () {
+	return this.options;
+};
+/**
+ *
+ * @param {Object} options
+ */
+JsonRpc.prototype.setOptions = function (options) {
+	Object.assign(this.options, options);
+};
+/**
  * Gets message type
  * @param {Object} message
  * @returns {string} Possible values: request, response, notification
