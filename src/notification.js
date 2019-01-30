@@ -10,6 +10,7 @@ const ExtError = require("exterror");
 /**
  * @param {JsonRpc} jr
  * @param {Object} message
+ * @constructor
  */
 function Notification(jr, message) {
 	this.jr = jr;

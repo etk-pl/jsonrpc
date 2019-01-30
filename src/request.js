@@ -15,6 +15,7 @@ const ExtError = require("exterror");
 /**
  * @param {JsonRpc} jr
  * @param {Object} message
+ * @constructor
  */
 function Request(jr, message) {
 	this.jr = jr;

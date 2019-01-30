@@ -7,6 +7,16 @@ const JSONLess = require("json-less");
 const ExtError = require("exterror");
 const error_codes = require("./codes");
 
+/**
+ *
+ * @param {Object} [options]
+ * @param {boolean} [options.autoFireCallbacks]
+ * @param {number} [options.callbacksTimeout]
+ * @param {Object} [options.encoder]
+ * @param {Function} options.encoder.parse
+ * @param {Function} options.encoder.stringify
+ * @constructor
+ */
 function JsonRpc(options) {
 	this.__id = 0;
 	this.options = Object.assign({
