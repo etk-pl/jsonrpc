@@ -29,7 +29,7 @@ const jr = new JR;
 const request = jr.Request();
 request.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
 console.log(request.toString());
-// {"version":"1.2.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 equals to
 ```javascript
@@ -41,7 +41,7 @@ const request = jr.Request({
 	params : {param1 : 'paramValue'}
 });
 console.log(request.toString());
-// {"version":"1.2.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### New response
@@ -54,7 +54,7 @@ const jr = new JR;
 const response = jr.Response();
 response.setId(1).setResult('someResult');
 console.log(response.toString());
-// {"version":"1.2.0","id":1,"result":"someResult"}
+// {"version":"1.3.0","id":1,"result":"someResult"}
 ```
 equals to
 ```javascript
@@ -65,7 +65,7 @@ const request = jr.Request({
 	result : 'someResult'
 });
 console.log(request.toString());
-// {"version":"1.2.0","id":1,"result":"someResult"}
+// {"version":"1.3.0","id":1,"result":"someResult"}
 ```
 
 #### with error
@@ -81,7 +81,7 @@ const response = jr.Response({
 	}
 });
 console.log(response.toString());
-// {"version":"1.2.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
@@ -93,7 +93,7 @@ response.setId(1).setError({
 	message : 'Error message'
 });
 console.log(response.toString());
-// {"version":"1.2.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
@@ -107,7 +107,7 @@ const response = jr.Response({
 	}
 });
 console.log(response.toString());
-// {"version":"1.2.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 
 ### New notification
@@ -118,7 +118,7 @@ const jr = new JR;
 const notification = jr.Notification();
 notification.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
 console.log(notification.toString());
-// {"version":"1.2.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 equals to
 ```javascript
@@ -130,7 +130,7 @@ const notification = jr.Notification({
 	params : {param1 : 'paramValue'}
 });
 console.log(notification.toString());
-// {"version":"1.2.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### Parse message
@@ -138,9 +138,9 @@ console.log(notification.toString());
 ```javascript
 const JR = require("@etk/jsonrpc");
 const jr = new JR;
-const notification = jr.parse('{"version":"1.2.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}');
+const notification = jr.parse('{"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}');
 console.log(notification.toString());
-// {"version":"1.2.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### Callbacks
@@ -168,18 +168,18 @@ output
 ```
 Request JsonRpcRequest {
   message: 
-   { version: '1.2.0',
+   { version: '1.3.0',
      id: 1,
      resource: '__global__',
      params: {},
      method: 'someMethod' } }
      
 Response JsonRpcResponse {
-  message: { version: '1.2.0', id: 1, result: { some: 'result' } } }
+  message: { version: '1.3.0', id: 1, result: { some: 'result' } } }
 
 Got response for message #1
 JsonRpcResponse {
-  message: { version: '1.2.0', id: 1, result: { some: 'result' } } }
+  message: { version: '1.3.0', id: 1, result: { some: 'result' } } }
 ```
 
 ### JSONLess

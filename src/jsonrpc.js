@@ -2,7 +2,7 @@
  * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 "use strict";
-const __version = "1.2.0";
+const __version = "1.3.0";
 const JSONLess = require("json-less");
 const ExtError = require("exterror");
 const error_codes = require("./codes");
