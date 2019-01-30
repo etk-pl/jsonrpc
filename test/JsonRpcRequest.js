@@ -29,8 +29,7 @@ describe("JsonRpcRequest", () => {
 	describe("restricted methods", () => {
 		const obj = jr.Request();
 		const methods = "result,error".split(",");
-		//MARK
-		it.skip("setVersion", () => {
+		it("setVersion", () => {
 			assert.throws(() => {
 				obj.setVersion("0.0.0");
 			});

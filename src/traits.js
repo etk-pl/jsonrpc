@@ -37,6 +37,9 @@ function getVersion() {
  * Sets message schema version
  */
 function setVersion(version) {
+	if (JsonRpc.version !== version) {
+		throw new ExtError("ERR_CANT_OVERWRITE_VERSION", "Can't overwrite version");
+	}
 }
 
 /**

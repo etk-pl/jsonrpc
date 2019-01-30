@@ -28,8 +28,7 @@ describe("JsonRpcNotification", () => {
 	describe("restricted methods", () => {
 		const obj = jr.Notification();
 		const methods = "id,result,error".split(",");
-		//MARK
-		it.skip("setVersion", () => {
+		it("setVersion", () => {
 			assert.throws(() => {
 				obj.setVersion("0.0.0");
 			});
