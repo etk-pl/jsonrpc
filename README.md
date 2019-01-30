@@ -7,15 +7,15 @@
 ## Schema
 ```javascript
 {
-	"version" : string,
-	"id" : number,
-	"resource" : string,
-	"method" : string,
-	"params" : Object,
-	"result" : *,
-	"error" : {
-		"code" : string,
-		"message" : string
+	"version": string,
+	"id": number,
+	"resource": string,
+	"method": string,
+	"params": Object,
+	"result": *,
+	"error": {
+		"code": string,
+		"message": string
 	}
 }
 ```
@@ -24,22 +24,24 @@
 
 ### New request
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var request = new jsonrpc.Request();
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const request = jr.Request();
 request.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
 console.log(request.toString());
-// {"version":"1.1.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 equals to
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var request = new jsonrpc.Request({
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const request = jr.Request({
 	resource : 'someResource',
 	method : 'methodName',
 	params : {param1 : 'paramValue'}
 });
 console.log(request.toString());
-// {"version":"1.1.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","id":1,"resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### New response
@@ -47,28 +49,31 @@ console.log(request.toString());
 #### with result
 
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var response = new jsonrpc.Response();
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const response = jr.Response();
 response.setId(1).setResult('someResult');
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"result":"someResult"}
+// {"version":"1.3.0","id":1,"result":"someResult"}
 ```
 equals to
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var request = new jsonrpc.Request({
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const request = jr.Request({
 	id : 1,
 	result : 'someResult'
 });
 console.log(request.toString());
-// {"version":"1.1.0","id":1,"result":"someResult"}
+// {"version":"1.3.0","id":1,"result":"someResult"}
 ```
 
 #### with error
 
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var response = new jsonrpc.Response({
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const response = jr.Response({
 	id : 1,
 	error : {
 		code : "ERR_CODE",
@@ -76,25 +81,25 @@ var response = new jsonrpc.Response({
 	}
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var response = new jsonrpc.Response({
-	id : 1,
-	error : {
-		code : "ERR_CODE",
-		message : 'Error message'
-	}
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const response = jr.Response();
+response.setId(1).setError({
+	code : "ERR_CODE",
+	message : 'Error message'
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 equals to
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var response = new jsonrpc.Response({
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const response = jr.Response({
 	id : 1,
 	error : {
 		code : "ERR_CODE",
@@ -102,45 +107,48 @@ var response = new jsonrpc.Response({
 	}
 });
 console.log(response.toString());
-// {"version":"1.1.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
+// {"version":"1.3.0","id":1,"error":{"code":"ERR_CODE","message":"Error message"}}
 ```
 
 ### New notification
 
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var notification = new jsonrpc.Notification();
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const notification = jr.Notification();
 notification.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
 console.log(notification.toString());
-// {"version":"1.1.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 equals to
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var notification = new jsonrpc.Notification({
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const notification = jr.Notification({
 	resource : 'someResource',
 	method : 'methodName',
 	params : {param1 : 'paramValue'}
 });
 console.log(notification.toString());
-// {"version":"1.1.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### Parse message
 
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-var notification = jsonrpc.parse('{"version":"1.1.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}');
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const notification = jr.parse('{"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}');
 console.log(notification.toString());
-// {"version":"1.1.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
+// {"version":"1.3.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}
 ```
 
 ### Callbacks
 
 ```javascript
-var jsonrpc = require('@etk/jsonrpc');
-
-var request = new jsonrpc.Request();
+const JR = require("@etk/jsonrpc");
+const jr = new JR;
+const request = jr.Request();
 request.setMethod('someMethod');
 request.setCallback((res) => {
 	console.log('Got response for message #' + request.getId());
@@ -148,30 +156,30 @@ request.setCallback((res) => {
 });
 console.log("Request", request);
 
-var response = new jsonrpc.Response();
+const response = jr.Response();
 response.setId(request.getId());
 response.setResult({some : 'result'});
 console.log("Response", response);
 
 // Callback will fire automagicaly after response is parsed
-jsonrpc.parse(response.toString());
+jr.parse(response.toString());
 ```
 output
 ```
 Request JsonRpcRequest {
   message: 
-   { version: '1.1.0',
+   { version: '1.3.0',
      id: 1,
      resource: '__global__',
      params: {},
      method: 'someMethod' } }
      
 Response JsonRpcResponse {
-  message: { version: '1.1.0', id: 1, result: { some: 'result' } } }
+  message: { version: '1.3.0', id: 1, result: { some: 'result' } } }
 
 Got response for message #1
 JsonRpcResponse {
-  message: { version: '1.1.0', id: 1, result: { some: 'result' } } }
+  message: { version: '1.3.0', id: 1, result: { some: 'result' } } }
 ```
 
 ### JSONLess
