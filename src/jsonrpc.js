@@ -39,7 +39,7 @@ JsonRpc.prototype.getOptions = function () {
  * @param {Object} options
  */
 JsonRpc.prototype.setOptions = function (options) {
-	Object.assign(this.options, options);
+	this.options = Object.assign(this.options, options);
 };
 /**
  * Gets message type
@@ -176,7 +176,7 @@ JsonRpc.prototype.fireCallback = function (response) {
 		const callback = this.callbacks[response.getId()];
 		if (callback instanceof Object && callback.cb instanceof Function) {
 			clearTimeout(callback.timeout);
-			callback.cb(response);
+			callback.cb(response.getError(), response.getResult());
 			this.removeCallback(response.getId());
 		}
 	} else {

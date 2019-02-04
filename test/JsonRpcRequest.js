@@ -48,9 +48,9 @@ describe("JsonRpcRequest", () => {
 				resource: "someNS",
 				method: "someMethod",
 				params: {some: "params"},
-				callback: (res) => {
-					assert.ok(res instanceof JR.Response);
-					assert.strictEqual(res.getId(), 1);
+				callback: (err, res) => {
+					assert.strictEqual(err, undefined);
+					assert.strictEqual(res, "some result");
 					done();
 				}
 			})).toJSON(), {
@@ -63,7 +63,32 @@ describe("JsonRpcRequest", () => {
 			setImmediate(() => {
 				jr.parse(jr.Response({
 					id: 1,
-					result: ""
+					result: "some result"
+				}).toString());
+			});
+		});
+		it("promise", (done) => {
+			const req = jr.Request({
+				id: 1,
+				resource: "someNS",
+				method: "someMethod",
+				params: {some: "params"}
+			});
+			req.promise().then((res) => {
+				assert.strictEqual(res, "some result");
+				done();
+			}).catch(done);
+			assert.deepStrictEqual(req.toJSON(), {
+				id: 1,
+				version: JR.version,
+				resource: "someNS",
+				method: "someMethod",
+				params: {"some": "params"}
+			});
+			setImmediate(() => {
+				jr.parse(jr.Response({
+					id: 1,
+					result: "some result"
 				}).toString());
 			});
 		});
@@ -85,9 +110,9 @@ describe("JsonRpcRequest", () => {
 			assert.throws(() => {
 				req.setParams(null);
 			});
-			req.setCallback((res) => {
-				assert.ok(res instanceof JR.Response);
-				assert.strictEqual(res.getId(), 2);
+			req.setCallback((err, res) => {
+				assert.strictEqual(err, undefined);
+				assert.strictEqual(res, "result");
 				done();
 			});
 			assert.throws(() => {
@@ -100,7 +125,7 @@ describe("JsonRpcRequest", () => {
 			setImmediate(() => {
 				jr.parse(jr.Response({
 					id: 2,
-					result: ""
+					result: "result"
 				}).toString());
 			});
 		});

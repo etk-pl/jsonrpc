@@ -82,9 +82,9 @@ describe("JsonRpc", () => {
 		});
 	});
 	it("set/getOptions", () => {
-		const o = jr.getOptions(), no = {autoFireCallbacks: true};
+		const o = Object.assign({}, jr.getOptions()), no = {autoFireCallbacks: true};
 		jr.setOptions(no);
-		assert.deepStrictEqual(jr.getOptions(), no);
+		assert.deepStrictEqual(jr.getOptions(), Object.assign(o, no));
 	});
 	describe("getType", () => {
 		it("valid input", () => {
