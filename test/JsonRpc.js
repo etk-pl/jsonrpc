@@ -53,7 +53,7 @@ describe("JsonRpc", () => {
 				error: new ExtError("code", "msg")
 			}),
 			"{\"version\":\"" + JR.version + "\",\"id\":1,\"result\":null}",
-			"{\"version\":\"" + JR.version + "\",\"id\":1,\"error\":" + "{\"$type\":\"ExtError\",\"$value\":{\"code\":1,\"message\":\"msg\"}}" + "}",
+			"{\"version\":\"" + JR.version + "\",\"id\":1,\"error\":" + "{\"code\":\"code\",\"message\":\"msg\"}" + "}",
 			"{\"version\":\"" + JR.version + "\",\"id\":1,\"resource\":\"__global__\",\"method\":\"ping\",\"params\":{}}",
 			"{\"version\":\"" + JR.version + "\",\"resource\":\"__global__\",\"method\":\"ping\",\"params\":{}}"
 		];

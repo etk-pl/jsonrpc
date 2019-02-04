@@ -60,19 +60,25 @@ describe("JsonRpcResponse", () => {
 			assert.strictEqual(not.getError(), undefined);
 		});
 		it("constructor params with error", () => {
-			assert.deepStrictEqual((jr.Response({
+			const res = jr.Response({
 				id: 1,
-				error: new ExtError({
+				error: {
 					message: "some error",
 					code: "0"
-				})
-			})).toJSON(), {
+				}
+			});
+			assert.strictEqual(res.toString(), JSON.stringify({
+				"version": JR.version,
+				"id": 1,
+				"error": {
+					"code": "0",
+					"message": "some error"
+				}
+			}));
+			assert.deepStrictEqual(res.toJSON(), {
 				id: 1,
 				version: JR.version,
-				error: new ExtError({
-					message: "some error",
-					code: "0"
-				})
+				error: new ExtError("0", "some error")
 			});
 		});
 		it("methods with error", () => {

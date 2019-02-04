@@ -42,12 +42,11 @@ function Request(jr, message) {
  */
 Request.prototype.promise = function (ttl) {
 	return new Promise((resolve, reject) => {
-		this.setCallback((response) => {
-			const error = response.getError();
+		this.setCallback((error, result) => {
 			if (error) {
 				return reject(error);
 			}
-			resolve(response.getResult());
+			resolve(result);
 		}, ttl);
 	});
 };

@@ -2,7 +2,7 @@
  * @author Michał Żaloudik <ponury.kostek@gmail.com>
  */
 "use strict";
-const __version = "1.3.0";
+const __version = "1.2.0";
 const JSONLess = require("json-less");
 const ExtError = require("exterror");
 const error_codes = require("./codes");
@@ -133,7 +133,7 @@ JsonRpc.isValidResponse = function isValidResponse(message) {
 			return false;
 		}
 	}
-	return message.version === __version && (message.result !== undefined || ((typeof message.error === "object" && message.error !== null && Object.getOwnPropertyNames(message.error).sort().join(" ") === [
+	return message.version === __version && (message.result !== undefined || ((typeof message.error === "object" && message.error !== null && Object.keys(message.error).sort().join(" ") === [
 		"code",
 		"message"
 	].join(" ") && typeof message.error.code === "string" && typeof message.error.message === "string") || message.error instanceof ExtError));
@@ -202,11 +202,6 @@ module.exports.Response = Response;
 module.exports.Notification = Notification;
 module.exports.version = __version;
 module.exports.addHandler = JSONLess.addHandler;
-JSONLess.addHandler(ExtError, (cls, value) => {
-	return value.toJSON();
-}, (cls, value) => {
-	return new ExtError(value.code, value.message);
-});
 /**
  *
  * @param message
