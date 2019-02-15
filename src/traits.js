@@ -126,7 +126,7 @@ function setCallback(callback, tls) {
 	}
 	const timeout = setTimeout(() => {
 		this.jr.removeCallback(this.message.id);
-	}, tls);
+	}, tls).unref();
 	this.jr.callbacks[this.message.id] = {
 		cb: callback,
 		timeout: timeout
