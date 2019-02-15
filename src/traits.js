@@ -57,7 +57,7 @@ function getId() {
  */
 function setId(id) {
 	if (typeof id !== "number") {
-		throw new Error("Id must be 'integer'");
+		throw new ExtError("ERR_ID_MUST_BE_INTEGER", "ID must be 'integer'");
 	}
 	this.message.id = id;
 	return this;
@@ -78,7 +78,7 @@ function getResource() {
  */
 function setResource(resource) {
 	if (typeof resource !== "string") {
-		throw new ExtError("Resource must be 'String' type");
+		throw new ExtError("ERR_RESOURCE_MUST_BE_STRING", "Resource must be 'string' type");
 	}
 	this.message.resource = resource;
 	return this;
@@ -99,7 +99,7 @@ function getMethod() {
  */
 function setMethod(method) {
 	if (typeof method !== "string") {
-		throw new ExtError("", "Method must be 'String' type");
+		throw new ExtError("ERR_METHOD_MUST_BE_STRING", "Method must be 'string' type");
 	}
 	this.message.method = method;
 	return this;
@@ -122,7 +122,7 @@ function getCallback() {
 function setCallback(callback, tls) {
 	tls = tls || this.jr.options.callbacksTimeout;
 	if (typeof callback !== "function") {
-		throw new ExtError("", "Callback must be function");
+		throw new ExtError("ERR_CALLBACK_MUST_BE_FUNCTION", "'callback' must be a function");
 	}
 	const timeout = setTimeout(() => {
 		this.jr.removeCallback(this.message.id);
@@ -149,7 +149,7 @@ function getParams() {
  */
 function setParams(params) {
 	if (typeof params !== "object" || params === null) {
-		throw new ExtError("", "Params must be 'Object' type");
+		throw new ExtError("ERR_PARAMS_MUST_BE_OBJECT", "'params' must be an object");
 	}
 	this.message.params = params;
 	return this;
