@@ -169,6 +169,9 @@ function getResult() {
  * @returns {JsonRpc}
  */
 function setResult(result) {
+	if(result === undefined) {
+		throw new ExtError("ERR_UNDEFINED_RESULT", "'result' can't be undefined");
+	}
 	this.message.result = result;
 	return this;
 }
