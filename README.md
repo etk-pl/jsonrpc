@@ -150,7 +150,11 @@ const JR = require("@etk/jsonrpc");
 const jr = new JR;
 const request = jr.Request();
 request.setMethod('someMethod');
-request.setCallback((res) => {
+request.setCallback((err, res) => {
+	if(err) {
+		console.log('Got error: ' + err.message);
+		return;
+	}
 	console.log('Got response for message #' + request.getId());
 	console.log(res);
 });
