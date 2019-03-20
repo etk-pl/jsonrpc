@@ -193,6 +193,21 @@ JsonRpc.prototype.removeCallback = function (id) {
 		delete this.callbacks[id];
 	}
 };
+/**
+ *
+ * @param {Number} id
+ */
+JsonRpc.prototype.timeoutCallback = function (id) {
+	const callback = this.callbacks[id];
+	if (typeof callback === "object" && callback !== null) {
+		callback.cb(new ExtError("ERR_RPC_REQUEST_TIMEOUT", "RPC request timeout after " + callback.tls + "ms"));
+		delete this.callbacks[id];
+	}
+};
+/**
+ *
+ * @type {JsonRpc}
+ */
 module.exports = JsonRpc;
 const Request = require("./request.js");
 const Response = require("./response.js");

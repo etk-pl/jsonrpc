@@ -7,6 +7,7 @@ const {uc_first} = require("../src/common");
 const JR = require(__dirname + "/../index.js");
 const jr = new JR;
 const assert = require("assert");
+const ExtError = require("exterror");
 describe("JsonRpcRequest", () => {
 	it("invalid message type", () => {
 		assert.throws(() => {
@@ -127,6 +128,28 @@ describe("JsonRpcRequest", () => {
 					id: 2,
 					result: "result"
 				}).toString());
+			});
+		});
+		describe("Timeout", () => {
+			it("callback", (done) => {
+				const req = jr.Request();
+				req.setCallback((err, res) => {
+					assert(err instanceof ExtError);
+					assert.strictEqual(err.code, "ERR_RPC_REQUEST_TIMEOUT");
+					assert(!res);
+					done();
+				}, 1);
+			});
+			it("promise", (done) => {
+				const req = jr.Request();
+				req.promise(1).then((res) => {
+					assert(!res);
+					done();
+				}).catch((err) => {
+					assert(err instanceof ExtError);
+					assert.strictEqual(err.code, "ERR_RPC_REQUEST_TIMEOUT");
+					done();
+				});
 			});
 		});
 	});

@@ -125,12 +125,13 @@ function setCallback(callback, tls) {
 		throw new ExtError("ERR_CALLBACK_MUST_BE_FUNCTION", "'callback' must be a function");
 	}
 	const timeout = setTimeout(() => {
-		this.jr.removeCallback(this.message.id);
+		this.jr.timeoutCallback(this.message.id);
 	}, tls);
 	timeout.unref && timeout.unref();
 	this.jr.callbacks[this.message.id] = {
 		cb: callback,
-		timeout: timeout
+		timeout: timeout,
+		tls
 	};
 	return this;
 }
@@ -170,7 +171,7 @@ function getResult() {
  * @returns {JsonRpc}
  */
 function setResult(result) {
-	if(result === undefined) {
+	if (result === undefined) {
 		throw new ExtError("ERR_UNDEFINED_RESULT", "'result' can't be undefined");
 	}
 	this.message.result = result;
