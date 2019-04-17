@@ -1,6 +1,6 @@
 {
   "name": "@etk/jsonrpc",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Json-rpc implementation",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "coveralls": "^3.0.3",
     "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.5",
-    "json-less": "^0.4.6",
+    "json-less": "^0.4.7",
     "mocha": "^6.1.3",
     "mocha-lcov-reporter": "^1.3.0",
     "mongodb": "^3.2.3",
