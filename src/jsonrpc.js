@@ -21,7 +21,7 @@ function JsonRpc(options) {
 	this.__id = 0;
 	this.options = Object.assign({
 		autoFireCallbacks: true,
-		callbacksTimeout: 60000,
+		callbacksTimeout: 86400000,
 		encoder: JSONLess
 	}, options || {});
 	this.callbacks = {};
