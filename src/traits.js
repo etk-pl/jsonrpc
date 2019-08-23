@@ -194,7 +194,7 @@ function getError() {
 function setError(error) {
 	if (error) {
 		if (!(error instanceof ExtError)) {
-			error = new ExtError(error.code, error.message);
+			error = new ExtError(String(error.code), String(error.message));
 		}
 		this.message.error = error;
 	}
