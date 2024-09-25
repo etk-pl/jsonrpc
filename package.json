@@ -1,5 +1,5 @@
 {
-  "name": "@etk/jsonrpc",
+  "name": "@etk-pl/jsonrpc",
   "version": "2.2.1",
   "description": "Json-rpc implementation",
   "main": "index.js",

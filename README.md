@@ -24,7 +24,7 @@
 
 ### New request
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const request = jr.Request();
 request.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
@@ -33,7 +33,7 @@ console.log(request.toString());
 ```
 equals to
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const request = jr.Request({
 	resource : 'someResource',
@@ -49,7 +49,7 @@ console.log(request.toString());
 #### with result
 
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const response = jr.Response();
 response.setId(1).setResult('someResult');
@@ -58,7 +58,7 @@ console.log(response.toString());
 ```
 equals to
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const request = jr.Request({
 	id : 1,
@@ -71,7 +71,7 @@ console.log(request.toString());
 #### with error
 
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const response = jr.Response({
 	id : 1,
@@ -85,7 +85,7 @@ console.log(response.toString());
 ```
 equals to
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const response = jr.Response();
 response.setId(1).setError({
@@ -97,7 +97,7 @@ console.log(response.toString());
 ```
 equals to
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const response = jr.Response({
 	id : 1,
@@ -113,7 +113,7 @@ console.log(response.toString());
 ### New notification
 
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const notification = jr.Notification();
 notification.setResource('someResource').setMethod('methodName').setParams({'param1' : 'paramValue'});
@@ -122,7 +122,7 @@ console.log(notification.toString());
 ```
 equals to
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const notification = jr.Notification({
 	resource : 'someResource',
@@ -136,7 +136,7 @@ console.log(notification.toString());
 ### Parse message
 
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const notification = jr.parse('{"version":"1.2.0","resource" : "someResource","method":"methodName","params":{"param1":"paramValue"}}');
 console.log(notification.toString());
@@ -146,7 +146,7 @@ console.log(notification.toString());
 ### Callbacks
 
 ```javascript
-const JR = require("@etk/jsonrpc");
+const JR = require("@etk-pl/jsonrpc");
 const jr = new JR;
 const request = jr.Request();
 request.setMethod('someMethod');
